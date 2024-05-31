@@ -9,9 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 export const routes: Routes = [
   { path: '', redirectTo: 'Home', pathMatch: 'full' },
   { path: 'Home', component: HomeComponent },
-  { path: 'ViewPost/:postId', component: ViewPostComponent },
+  { path: 'ViewPost/:id', component: ViewPostComponent },
   { path: 'AddPost', component: AddPostComponent },
-  { path: 'EditPost/:postId', component: EditPostComponent }
+  { path: 'List/:codeType', component: EditPostComponent }
 ];
 
 @NgModule({

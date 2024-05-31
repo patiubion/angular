@@ -1,22 +1,22 @@
 <div class="container p-5">
   <div class="row">
     <div class="col-8 d-flex flex-column gap-4">
-      <div *ngFor="let post of postList; let i = index">
+      <div *ngFor="let post of filterdPostList">
         <div class="card">
           <div class="row no-gutters">
             <div class="col-sm-5">
-              <img class="card-img" src="../../assets/images/hq720.jpg" alt="Suresh Dasari Card">
+              <img class="card-img" src="{{post.thumbnail}}" alt="Ảnh lỗi">
             </div>
             <div class="col-sm-7">
               <div class="card-body h-100 d-flex flex-column justify-content-between">
                 <div>
                   <h5 class="card-title">
-                    <a href="">{{ post.title }}</a>
+                    <a href="/ViewPost/{{post.id}}">{{ post.tieuDe }}</a>
                   </h5>
-                  <p class="card-text">{{post.content}}</p>
+                  <p class="card-text">{{post.noiDung}}</p>
                 </div>
 
-                <small>{{post.time}}</small>
+                <small>{{post.theLoai.theLoai}}</small>
               </div>
             </div>
           </div>
@@ -30,10 +30,11 @@
           <li class="list-group-item">
             <div class="row height d-flex justify-content-center align-items-center">
               <div class="col-md-12">
-                <div class="search d-flex gap-2">
-                  <input type="text" class="form-control" placeholder="Nhập nội dung muốn tìm kiếm ...">
-                  <button class="btn btn-primary">Search</button>
-                </div>
+                <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" class="search d-flex gap-2">
+                  <input type="text" class="form-control" placeholder="Nhập nội dung muốn tìm kiếm ..."
+                    formControlName="search">
+                  <button type="submit" class="btn btn-primary">Search</button>
+                </form>
               </div>
             </div>
           </li>
@@ -44,15 +45,8 @@
           <li class="list-group-item font-weight-bold">Thể loại</li>
           <li class="list-group-item">
             <div class="row height d-flex justify-content-center align-items-center">
-              <div class="col-md-6">
-                <p><a class="link-opacity-100-hover" href="#">Thời sự</a></p>
-                <p><a class="link-opacity-100-hover" href="#">Thể thao</a></p>
-                <p><a class="link-opacity-100-hover" href="#">Kinh doanh</a></p>
-              </div>
-              <div class="col-md-6">
-                <p><a class="link-opacity-100-hover" href="#">Bất động sản</a></p>
-                <p><a class="link-opacity-100-hover" href="#">Giải trí</a></p>
-                <p><a class="link-opacity-100-hover" href="#">Giáo dục</a></p>
+              <div class="col-md-12" *ngFor="let theloai of theLoaiList">
+                <p><a class="link-opacity-100-hover" href="/List/{{theloai.code}}">{{theloai.theLoai}}</a></p>
               </div>
             </div>
           </li>
